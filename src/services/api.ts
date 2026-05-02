@@ -12,9 +12,13 @@ export interface Category {
 
 // Fetch motivational quote
 export async function fetchMotivationalQuote(): Promise<Quote> {
-  const response = await fetch('https://zenquotes.io/api/random');
+  const target = encodeURIComponent('https://zenquotes.io/api/random');
+  const response = await fetch(`https://api.allorigins.win/get?url=${target}`);
+  
   if (!response.ok) throw new Error('Falha ao buscar frase motivacional');
-  const data = (await response.json()) as Quote[];
+  
+  const wrapper = await response.json();
+  const data = JSON.parse(wrapper.contents) as Quote[];
   return data[0];
 }
 

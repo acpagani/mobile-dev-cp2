@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert, Platform } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTheme } from '../../context/ThemeContext';
@@ -35,19 +35,22 @@ export function TaskDetailScreen() {
   }
 
   function handleDelete() {
+    if (Platform.OS === 'web') {
+      if (window.confirm(`Tem certeza que deseja excluir "${task!.title}"?`)) {
+        removeTask(task!.id).then(() => navigation.goBack());
+      }
+      return;
+    }
+
     Alert.alert(
       'Excluir tarefa',
       `Tem certeza que deseja excluir "${task!.title}"?`,
       [
         { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Excluir',
-          style: 'destructive',
-          onPress: async () => {
-            await removeTask(task!.id);
-            navigation.goBack();
-          },
-        },
+        { text: 'Excluir', style: 'destructive', onPress: async () => {
+          await removeTask(task!.id);
+          navigation.goBack();
+        }},
       ]
     );
   }

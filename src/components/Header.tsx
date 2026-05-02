@@ -28,7 +28,7 @@ export function Header({ title }: HeaderProps) {
       <View style={styles.right}>
         <View style={[styles.badge, { backgroundColor: user?.role === 'admin' ? colors.primary + '22' : colors.success + '22' }]}>
           <Text style={[styles.badgeText, { color: user?.role === 'admin' ? colors.primary : colors.success }]}>
-            {user?.role === 'admin' ? '⚡ Admin' : '👤 User'}
+            {user?.role === 'admin' ? '⚡ Administrador' : '👤 Usuário'}
           </Text>
         </View>
         <TouchableOpacity

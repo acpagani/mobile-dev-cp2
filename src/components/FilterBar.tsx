@@ -25,6 +25,7 @@ export function FilterBar({ active, onChange }: FilterBarProps) {
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.scroll}
+      style={{ flexGrow: 0 }}
     >
       {FILTERS.map((f) => {
         const isActive = active === f.value;
@@ -50,7 +51,13 @@ export function FilterBar({ active, onChange }: FilterBarProps) {
 }
 
 const styles = StyleSheet.create({
-  scroll: { paddingHorizontal: 20, paddingVertical: 12, gap: 8, flexDirection: 'row' },
+  scroll: { 
+    paddingHorizontal: 20, 
+    paddingVertical: 12, 
+    gap: 8, 
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   chip: {
     paddingHorizontal: 16,
     paddingVertical: 8,

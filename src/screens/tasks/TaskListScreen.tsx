@@ -20,8 +20,10 @@ export function TaskListScreen() {
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
       <Header title="Tarefas" />
-      <FilterBar active={activeFilter} onChange={setActiveFilter} />
+      <FilterBar
+        active={activeFilter} onChange={setActiveFilter} />
       <FlatList
+        style={{ flex: 1 }}
         data={filteredTasks}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
@@ -48,7 +50,9 @@ export function TaskListScreen() {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1 },
+  screen: { 
+    flex: 1,
+  },
   fab: {
     position: 'absolute',
     bottom: 24,

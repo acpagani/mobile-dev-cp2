@@ -114,7 +114,6 @@ export function TaskFormScreen() {
           value={description}
           onChangeText={setDescription}
           multiline
-          style={{ height: 80 }}
           containerStyle={{ marginBottom: 16 }}
         />
 
