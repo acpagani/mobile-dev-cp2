@@ -6,14 +6,17 @@ import { TaskStackRoutes } from './TaskStackRoutes';
 import { SettingsScreen } from '../screens/settings/SettingsScreen';
 import { TabParamList } from '../types/navigation';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '@/context/AuthContext';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export function TabRoutes() {
   const { colors } = useTheme();
+  const { user } = useAuth();
 
   return (
     <Tab.Navigator
+      initialRouteName={user?.role === 'admin' ? 'SettingsTab' : 'HomeTab'}
       screenOptions={{
         headerShown: false,
         tabBarStyle: {

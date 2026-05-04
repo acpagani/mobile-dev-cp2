@@ -54,7 +54,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function logout(): Promise<void> {
     setUser(null);
-    await AsyncStorage.multiRemove([AUTH_KEY]);
+    setTreatmentState('');
+    await AsyncStorage.multiRemove([AUTH_KEY, TREATMENT_KEY]);
   }
 
   async function setTreatment(t: TreatmentPreference): Promise<void> {
