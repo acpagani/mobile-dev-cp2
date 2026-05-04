@@ -10,16 +10,23 @@ export interface Category {
   url: string;
 }
 
-// Fetch motivational quote
+export interface Quote {
+  q: string;      // mantém a mesma interface — zero mudança no HomeScreen
+  a: string;
+}
+
 export async function fetchMotivationalQuote(): Promise<Quote> {
-  const target = encodeURIComponent('https://zenquotes.io/api/random');
-  const response = await fetch(`https://api.allorigins.win/get?url=${target}`);
-  
+  const response = await fetch('https://api.quotable.kurokeita.dev/api/quotes/random');
+
   if (!response.ok) throw new Error('Falha ao buscar frase motivacional');
-  
-  const wrapper = await response.json();
-  const data = JSON.parse(wrapper.contents) as Quote[];
-  return data[0];
+
+  const data = await response.json();
+
+  // Mapeia para o mesmo formato { q, a } que o HomeScreen já usa
+  return {
+    q: data.quote.content,
+    a: data.quote.author.name,
+  };
 }
 
 // Fetch categories from DummyJSON products categories
